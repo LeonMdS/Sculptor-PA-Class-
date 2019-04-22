@@ -50,8 +50,8 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
 };
 
 
-//The Ellipse funcion takes in the x, y and z centers, and activates voxels of a sculptor pointer if true, and deactivates them if false
-//in the case of it being inside the ellipse
+//The Ellipse funcion takes in the x, y and z centers, and, in the case of it being inside of the ellipse, it activates the
+//voxels of a sculptor pointer if true, and deactivates them if false
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
     Ellipse(xcenter, ycenter, zcenter, radius, radius, radius, true, this);
 };
@@ -81,27 +81,29 @@ void Sculptor::writeOFF(string filename){
     //Iterates through array and uses the lambda on each voxel
     //Reminder: the this keyword represents a pointer to the current sculptor this is activated on
     GoThrough(0, this->nx, 0, this->ny, 0, this->nz, [&outfile, this](int x, int y, int z){
-        //Determines current voxel
+        //Determines current voxel and if it is surrounded
         Voxel voxel = (this->v)[x][y][z];
+        bool not_surrounded = notSurrounded(x, y, z, this->v, this->nx, this->ny, this->nz);
 
         //Outputs the information about the vertices of the voxel if it is both turned on
         //and not surrounded by other voxels
-        if(voxel.isOn && notSurrounded(x, y, z, this->v, this->nx, this->ny, this->nz)){
+        if(voxel.isOn && not_surrounded){
             OutVertices(x, y, z, &outfile);
         }
     });
 
-    //Counter to be used in the lambda
+    //Counter to be used in the lambda function
     size_t i = 0;
 
     //Iterates through array and uses the lambda on each voxel, as it was done previously
     //Reminder: the this keyword represents a pointer to the current sculptor this is activated on
     GoThrough(0, this->nx, 0, this->ny, 0, this->nz, [&outfile, &i, this](int x, int y, int z){
-        //Determines current voxel
+        //Determines current voxel and if it is surrounded
         Voxel voxel = (this->v)[x][y][z];
+        bool not_surrounded = notSurrounded(x, y, z, this->v, this->nx, this->ny, this->nz);
 
         //Output information about a face if the voxel is both on and not surrounded
-        if(voxel.isOn && notSurrounded(x, y, z, this->v, this->nx, this->ny, this->nz)) {
+        if(voxel.isOn && not_surrounded) {
             OutFaces(voxel, i, &outfile);
             i++;
         };
@@ -145,7 +147,7 @@ void Sculptor::writeVECT(string filename){
         //Determines current voxel
         Voxel voxel = (this->v)[x][y][z];
 
-        //Outputs voxel's current colors and transparency, if turned on
+        //Outputs voxel's color and transparency, if turned on
         if(voxel.isOn) { outfile << voxel.r << " " << voxel.g << " " << voxel.b << " " << voxel.a << std::endl; }
     });
 
