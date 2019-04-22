@@ -2,6 +2,7 @@
 
 using namespace std;
 
+//Test example
 int main(){
     Sculptor s(101, 101, 101);
     s.setColor(1, 1, 1, 1);
