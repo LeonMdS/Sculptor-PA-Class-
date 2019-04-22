@@ -22,17 +22,19 @@ void GoThrough(int x0, int x1, int y0, int y1, int z0, int z1, Func use){
     }
 };
 
-//Box function uses the GoThrough to iterate though the desired intervals and turn the voxels on or off, depending on the given bool put
+//Box function uses the GoThrough to iterate though the desired intervals and turn the voxels on or off, 
+//depending on the given boolean put
 void Box(int x0, int x1, int y0, int y1, int z0, int z1, bool put, Sculptor *sclptr){
 
-    //Iterates through the given interval, and utilizes of a lambda function
+    //Iterates through the given interval, and utilizes a lambda function
     GoThrough(x0, x1 + 1, y0, y1 + 1, z0, z1 + 1, [&](int x, int y, int z){
         if(put) { sclptr->putVoxel(x, y, z); }
         else { sclptr->cutVoxel(x, y, z); }
     });
 };
 
-//Ellipse function uses the GoThrough to iterate though the desired intervals and turn the voxels on or off depending on the given bool put
+//Ellipse function uses the GoThrough to iterate though the desired intervals and turn the voxels on or off,
+//depending on the given boolean put
 void Ellipse(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz, bool put, Sculptor* sclptr){
 
     //Creates the cubic interval that includes the ellipse, which will be used in the GoThrough function
@@ -46,7 +48,7 @@ void Ellipse(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz, bool
     //Determines the radius squared of x, y and z to be used inside the function
     double radius_sqrd_x = rx*rx, radius_sqrd_y = ry*ry, radius_sqrd_z = rz*rz;
 
-    //Variables to be used inside the lambda function
+    //Variables to be calculated inside the lambda function
     int dist_sqrd_x, dist_sqrd_y, dist_sqrd_z;
     double contribution_x, contribution_y, contribution_z, sum_of_contributions;
 
@@ -74,7 +76,8 @@ void Ellipse(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz, bool
     });
 };
 
-//Function to check if a given point is surrounded or not, also using the maximum values of the array to validate each point, to avoid segmentation faults
+//Function to check if a given point is surrounded or not, also using the maximum values of the array to validate each point,
+//to avoid segmentation faults
 bool notSurrounded(int x, int y, int z, Voxel ***voxels, int nx, int ny, int nz){
 
     //For loop will have i being -1 and 1
@@ -94,7 +97,8 @@ bool notSurrounded(int x, int y, int z, Voxel ***voxels, int nx, int ny, int nz)
     return false;
 }
 
-//Function to count the number of voxels turned on inside an array, counting the surrounded ones only if include_surrounded is true
+//Function to count the number of voxels turned on inside an array, 
+//counting the surrounded ones only if include_surrounded is true
 int CountVoxels(int nx, int ny, int nz, Voxel*** voxels, bool include_surrounded){
     //Counter to track the number of voxels
     int count = 0;
@@ -104,7 +108,8 @@ int CountVoxels(int nx, int ny, int nz, Voxel*** voxels, bool include_surrounded
         bool voxel_on = voxels[x][y][z].isOn;
         bool not_surrounded = notSurrounded(x, y, z, voxels, nx, ny, nz);
 
-        //If statement only activates if the voxel is on and not surrounded, but if include_surrounded is true, then it only needs the voxel to be on
+        //If statement only activates if the voxel is on and not surrounded, but if include_surrounded is true,
+        //then it only needs the voxel to be on
         if(voxel_on && (not_surrounded || include_surrounded)) { count++;}
     });
 
