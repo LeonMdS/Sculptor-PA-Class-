@@ -1,11 +1,7 @@
 #pragma once
 
 #include "VoxelClass.h"
-
-#ifndef _STR
-#define _STR
 #include <string>
-#endif
 
 using std::string;
 
