@@ -1,7 +1,5 @@
 #include "./Classes/Sculptor.cpp"
 
-using namespace std;
-
 //Test example
 int main(){
     Sculptor s(101, 101, 101);
