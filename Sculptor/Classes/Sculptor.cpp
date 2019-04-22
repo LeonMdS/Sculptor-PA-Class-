@@ -12,14 +12,14 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz){
     this->nz = _nz;
 };
 
-//Destructor deletes the entire allocated memory of the voxels
+//Destructor frees the entire memory allocated to the voxels
 Sculptor::~Sculptor(){
     delete[] v[0][0];
     delete[] v[0];
     delete[] v;
 }
 
-//Sets new colors and transparency to the sculptor
+//Sets new color and transparency of the sculptor
 void Sculptor::setColor(float r, float g, float b, float alpha){
     this->r = r;
     this->g = g;
