@@ -2,6 +2,7 @@
 
 #include "../Classes/VoxelClass.h"
 
+//Simple function to create a voxel matrix on the heap
 Voxel*** Matrix(int X, int Y, int Z){
     Voxel ***A;
     A = new Voxel** [X];
