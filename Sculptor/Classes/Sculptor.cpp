@@ -12,14 +12,14 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz){
     this->nz = _nz;
 };
 
-//Destructor frees the entire memory allocated to the voxels
+//Destructor deletes the entire allocated memory of the voxels
 Sculptor::~Sculptor(){
     delete[] v[0][0];
     delete[] v[0];
     delete[] v;
 }
 
-//Sets new color and transparency of the sculptor
+//Sets new colors and transparency to the sculptor
 void Sculptor::setColor(float r, float g, float b, float alpha){
     this->r = r;
     this->g = g;
@@ -50,8 +50,8 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
 };
 
 
-//The Ellipse funcion takes in the x, y and z centers, and, in the case of it being inside of the ellipse, it activates the
-//voxels of a sculptor pointer if true, and deactivates them if false
+//The Ellipse funcion takes in the x, y and z centers, and activates voxels of a sculptor pointer if true, and deactivates them if false
+//in the case of it being inside the ellipse
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
     Ellipse(xcenter, ycenter, zcenter, radius, radius, radius, true, this);
 };
@@ -92,7 +92,7 @@ void Sculptor::writeOFF(string filename){
         }
     });
 
-    //Counter to be used in the lambda function
+    //Counter to be used in the lambda
     size_t i = 0;
 
     //Iterates through array and uses the lambda on each voxel, as it was done previously
@@ -147,7 +147,7 @@ void Sculptor::writeVECT(string filename){
         //Determines current voxel
         Voxel voxel = (this->v)[x][y][z];
 
-        //Outputs voxel's color and transparency, if turned on
+        //Outputs voxel's current colors and transparency, if turned on
         if(voxel.isOn) { outfile << voxel.r << " " << voxel.g << " " << voxel.b << " " << voxel.a << std::endl; }
     });
 

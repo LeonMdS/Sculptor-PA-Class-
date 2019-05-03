@@ -2,7 +2,7 @@
 
 #include "../Classes/VoxelClass.h"
 
-//Simple function to create a voxel matrix on the heap
+//! Function to dynamically allocate a three-dimensional array.
 Voxel*** Matrix(int X, int Y, int Z){
     Voxel ***A;
     A = new Voxel** [X];
