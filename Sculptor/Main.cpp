@@ -1,7 +1,7 @@
 #include "./Classes/Sculptor.cpp"
 
 int main(){
-Sculptor s(100, 100, 100);
+    Sculptor s(100, 100, 100);
     s.setColor(0, 0, 0, 0.5);
     
     s.putBox(0,99,0,99,0,99);
@@ -44,4 +44,6 @@ Sculptor s(100, 100, 100);
     
     s.writeOFF("teste.off");
     s.writeVECT("teste.vect");
+    
+    return 0;
 }
