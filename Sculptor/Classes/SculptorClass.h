@@ -123,10 +123,10 @@ public:
   */
   void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
   //! Writes the array created in the .off format.
-  //! \param file is the path where the off file is set on the device
+  //! \param file is the path where the off file is set on the device. If the file doesn't exist, the function creates one.
 
   void writeOFF(string filename);
   //! Writes the array created in the .vect format.
-  //! \param file is the path where the vect file is set on the device
+  //! \param file is the path where the vect file is set on the device. If the file doesn't exist, the function creates one.
   void writeVECT(string filename);
 };
